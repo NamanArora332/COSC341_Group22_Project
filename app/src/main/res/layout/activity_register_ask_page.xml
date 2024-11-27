@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:background="#F5F5F5"
-    tools:context=".LoginPage">
+    tools:context=".Register_Ask_Page">
 
     <!-- Welcome Message -->
     <TextView
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/Welcome_Message"
+        android:text="Who are you?"
         android:textColor="#1A1A1A"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -23,64 +23,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Email Input Field -->
-    <EditText
-        android:id="@+id/emailEditText"
+    <!-- User Button -->
+    <Button
+        android:id="@+id/userButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/Email_Enter"
-        android:inputType="textEmailAddress"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#4CAF50"
+        android:elevation="4dp"
+        android:text="I am a User"
+        android:textAllCaps="false"
         android:background="@drawable/edit_text_background"
-        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcomeMessage"
         app:layout_constraintWidth_percent="0.85" />
 
-    <!-- Password Input Field -->
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/Password_Enter"
-        android:inputType="textPassword"
-        android:padding="16dp"
-        android:background="@drawable/edit_text_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText"
-        app:layout_constraintWidth_percent="0.85" />
-
-    <!-- Login Button -->
+    <!-- Store Manager Button -->
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/storeManagerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#007BFF"
+        android:backgroundTint="#FFC107"
         android:elevation="4dp"
-        android:text="@string/Login_Button"
+        android:text="I am a Store Manager"
         android:textAllCaps="false"
+        android:background="@drawable/edit_text_background"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@id/userButton"
         app:layout_constraintWidth_percent="0.85" />
 
-    <!-- Register Text -->
+    <!-- Instructional Text -->
     <TextView
-        android:id="@+id/registerText"
+        android:id="@+id/instructionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/Register_Message"
-        android:textColor="#007BFF"
+        android:layout_marginTop="30dp"
+        android:text="Select your role to proceed."
+        android:textColor="#757575"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@id/storeManagerButton" />
+
+    <!-- Go Back Button -->
+    <Button
+        android:id="@+id/goBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Go Back to Login Page"
+        android:textSize="16sp"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/edit_text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructionText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
