@@ -32,14 +32,18 @@ public class Register_Ask_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Register_Ask_Page.this, UserRegister.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
                 startActivity(intent);
+                finish();
             }
         });
         storeManagerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Register_Ask_Page.this, StoreManager_Register.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
                 startActivity(intent);
+                finish();
             }
         });
 
