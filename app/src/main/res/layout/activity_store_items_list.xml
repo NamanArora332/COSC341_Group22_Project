@@ -6,7 +6,65 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".Store_Items_List">
+    <!-- Title TextView -->
+    <TextView
+        android:id="@+id/storeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Store Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- RecyclerView for Products -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/storeTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addProductButton"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Add Product Button -->
+    <Button
+        android:id="@+id/addProductButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add Product"
+        app:layout_constraintBottom_toTopOf="@+id/deleteAllProductsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Delete All Products Button -->
+    <Button
+        android:id="@+id/deleteAllProductsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete All Products"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Back to Price Comparison"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 
