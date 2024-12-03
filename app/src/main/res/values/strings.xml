@@ -22,7 +22,9 @@
     <string name="category">Category</string>
     <string name="price_range">Price Range</string>
     <string name="apply_filter">Apply Filter</string>
-    <string name="price">Price: 5.00</string>
+    <string name="discount">Discount percentage(%)</string>
+    <string name="max">Maximum price</string>
+    <string name="min">Minimum price</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
