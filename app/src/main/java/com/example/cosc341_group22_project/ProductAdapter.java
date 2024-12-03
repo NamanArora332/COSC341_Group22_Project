@@ -1,4 +1,5 @@
 package com.example.cosc341_group22_project;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,11 +55,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         // Set up Remove button functionality
         holder.removeButton.setOnClickListener(v -> {
             // Handle Remove button click
-            db.collection("Product").document(product.getId())
+            db.collection("Products").document(product.getId()) // Ensure the collection name is "Products"
                     .delete()
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(context, product.getName() + " removed successfully", Toast.LENGTH_SHORT).show();
-                        // Do NOT update productList or notifyItemRemoved here.
+                        // Refresh product list
+                        productList.remove(position);  // Remove from list
+                        notifyItemRemoved(position);   // Notify adapter of removal
                     })
                     .addOnFailureListener(e -> Toast.makeText(context, "Failed to remove: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
@@ -68,6 +70,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    // Update the product list and notify adapter
+    public void updateProducts(List<Product> newProducts) {
+        productList.clear();           // Clear existing products
+        productList.addAll(newProducts); // Add filtered products
+        notifyDataSetChanged();        // Notify adapter that the data has changed
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {

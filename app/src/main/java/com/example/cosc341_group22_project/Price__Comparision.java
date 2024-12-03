@@ -2,7 +2,10 @@ package com.example.cosc341_group22_project;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -10,18 +13,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,7 @@ public class Price__Comparision extends AppCompatActivity {
     private FirebaseFirestore db;
     private Button logoutButton;
     private Button storeItemsButton; // Button for store manager
+    private Button filterButton; // Button for filtering
     private EditText searchEditText;
     private RecyclerView productsRecyclerView;
 
@@ -57,6 +55,7 @@ public class Price__Comparision extends AppCompatActivity {
         // Initialize Views
         logoutButton = findViewById(R.id.logoutButton);
         storeItemsButton = findViewById(R.id.storeItemsButton);
+        filterButton = findViewById(R.id.filterButton); // Initialize filter button
         searchEditText = findViewById(R.id.searchEditText);
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
 
@@ -78,9 +77,15 @@ public class Price__Comparision extends AppCompatActivity {
             finish();
         });
 
-        // Store Items Button functionality
+        // Store Items Button functionality (for store managers)
         storeItemsButton.setOnClickListener(v -> {
             Intent intent = new Intent(Price__Comparision.this, Store_Items_List.class);
+            startActivity(intent);
+        });
+
+        // Filter Button functionality (navigate to FilterActivity)
+        filterButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Price__Comparision.this, FilterActivity.class);
             startActivity(intent);
         });
 
