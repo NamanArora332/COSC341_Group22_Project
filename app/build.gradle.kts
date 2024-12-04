@@ -45,10 +45,16 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.firestore)
+
     implementation(libs.firebase.auth)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.google.firebase:firebase-messaging:23.1.1")
+    implementation("androidx.work:work-runtime:2.7.1")
+    implementation("com.google.guava:guava:31.1-android")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
 }
