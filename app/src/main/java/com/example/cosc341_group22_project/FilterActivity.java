@@ -1,7 +1,7 @@
 package com.example.cosc341_group22_project;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,9 +24,9 @@ public class FilterActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private Spinner categorySpinner;
     private EditText minPriceEditText, maxPriceEditText, discountEditText;
-    private Button applyFilterButton;
+    private Button applyFilterButton, backToComparisonButton;
     private RecyclerView resultsRecyclerView;
-    private ProductAdapter productAdapter;
+    private SearchResultsAdapter searchResultsAdapter;
     private List<Product> filteredProducts;
 
     @Override
@@ -42,13 +42,14 @@ public class FilterActivity extends AppCompatActivity {
         maxPriceEditText = findViewById(R.id.maxPriceEditText);
         discountEditText = findViewById(R.id.discountEditText);
         applyFilterButton = findViewById(R.id.applyFilterButton);
+        backToComparisonButton = findViewById(R.id.backToComparisonButton);
         resultsRecyclerView = findViewById(R.id.productsRecyclerView);
 
         // Set up RecyclerView
         filteredProducts = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, filteredProducts);
+        searchResultsAdapter = new SearchResultsAdapter(this, filteredProducts);
         resultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultsRecyclerView.setAdapter(productAdapter);
+        resultsRecyclerView.setAdapter(searchResultsAdapter);
 
         // Populate the spinner with categories
         List<String> categories = Arrays.asList("All", "Pantry", "Meat", "Dairy", "Beverages", "Frozen", "Produce", "Bakery");
@@ -58,49 +59,46 @@ public class FilterActivity extends AppCompatActivity {
 
         // Set up apply filter button click listener
         applyFilterButton.setOnClickListener(v -> applyFilter());
+
+        // Back button click listener
+        backToComparisonButton.setOnClickListener(v -> {
+            Intent intent = new Intent(FilterActivity.this, Price__Comparision.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void applyFilter() {
+        // Existing apply filter logic
         String category = categorySpinner.getSelectedItem().toString();
         String minPriceStr = minPriceEditText.getText().toString().trim();
         String maxPriceStr = maxPriceEditText.getText().toString().trim();
         String discountStr = discountEditText.getText().toString().trim();
 
-        // Default values for filters if empty input
         double minPrice = minPriceStr.isEmpty() ? 0 : Double.parseDouble(minPriceStr);
         double maxPrice = maxPriceStr.isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceStr);
         int discount = discountStr.isEmpty() ? 0 : Integer.parseInt(discountStr);
 
-        // Build Firestore query
         Query query = db.collection("Product");
 
-        // Apply category filter if selected (skip if "All")
-        if (!category.equals("All")) {
+        if (!"All".equalsIgnoreCase(category)) {
             query = query.whereEqualTo("category", category);
         }
 
-        // Apply price range filter if specified
         if (minPrice > 0) {
             query = query.whereGreaterThanOrEqualTo("price", minPrice);
         }
-        if (maxPrice < Double.MAX_VALUE) {
-            query = query.whereLessThanOrEqualTo("price", maxPrice);
-        }
 
-        // Apply discount filter if specified
-        if (discount > 0) {
-            query = query.whereGreaterThanOrEqualTo("discount", discount);
-        }
-
-        // Fetch filtered products from Firestore
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                filteredProducts.clear(); // Clear previous results
+                filteredProducts.clear();
                 task.getResult().forEach(document -> {
                     Product product = document.toObject(Product.class);
-                    filteredProducts.add(product);
+                    if (product.getPrice() <= maxPrice && product.getDiscount() >= discount) {
+                        filteredProducts.add(product);
+                    }
                 });
-                productAdapter.notifyDataSetChanged(); // Update the RecyclerView
+                searchResultsAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(FilterActivity.this, "Error fetching products: " + task.getException(), Toast.LENGTH_SHORT).show();
             }

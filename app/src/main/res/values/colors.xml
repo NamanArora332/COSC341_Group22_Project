@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+        <color name="backgroundColor">#F5F5F5</color> <!-- Light gray background -->
+        <color name="titleTextColor">#212121</color> <!-- Dark gray for titles -->
+        <color name="primaryTextColor">#212121</color> <!-- Primary text color -->
+        <color name="secondaryTextColor">#757575</color> <!-- Secondary text color -->
+        <color name="priceColor">#388E3C</color> <!-- Green color for prices -->
+        <color name="hintTextColor">#9E9E9E</color> <!-- Hint text gray color -->
+        <color name="buttonTextColor">#FFFFFF</color> <!-- White text for buttons -->
+        <color name="buttonBackgroundColor">#6200EA</color> <!-- Purple button color -->
+
+
 </resources>

@@ -1,92 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FilterActivity">
+    android:padding="16dp"
+    tools:context=".FilterActivity"
+    android:background="@color/backgroundColor">
 
     <!-- Title -->
-
-    <!-- Spinner for Category Selection -->
-
-    <!-- SeekBar for Price Filter -->
-
-    <!-- Apply Filter Button -->
-
-    <!-- RecyclerView to display filtered products -->
-
     <TextView
         android:id="@+id/filterTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Product Filter"
+        android:layout_marginBottom="16dp"
+        android:text="Filter Products"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/titleTextColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Category Spinner -->
     <Spinner
         android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/filterTitleTextView" />
 
+    <!-- Min Price EditText -->
     <EditText
         android:id="@+id/minPriceEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="292dp"
-        android:hint="@string/min"
+        android:layout_marginBottom="16dp"
+        android:hint="Min Price"
         android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@color/primaryTextColor"
+        android:textColorHint="@color/hintTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/categorySpinner" />
 
+    <!-- Max Price EditText -->
     <EditText
         android:id="@+id/maxPriceEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="224dp"
-        android:hint="@string/max"
+        android:layout_marginBottom="16dp"
+        android:hint="Max Price"
         android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@color/primaryTextColor"
+        android:textColorHint="@color/hintTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/minPriceEditText" />
 
+    <!-- Discount EditText -->
     <EditText
         android:id="@+id/discountEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="156dp"
-        android:hint="@string/discount"
+        android:layout_marginBottom="16dp"
+        android:hint="Min Discount (%)"
         android:inputType="number"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@color/primaryTextColor"
+        android:textColorHint="@color/hintTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/maxPriceEditText" />
 
+    <!-- Apply Filter Button -->
     <Button
         android:id="@+id/applyFilterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="316dp"
-        android:text="@string/apply_filter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="Apply Filter"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/buttonTextColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/discountEditText" />
 
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backToComparisonButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="Back to Comparison"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/buttonTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/applyFilterButton" />
+
+    <!-- RecyclerView for Results -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecyclerView"
-        android:layout_width="221dp"
-        android:layout_height="228dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="452dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/backToComparisonButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
