@@ -10,6 +10,7 @@
         <color name="hintTextColor">#9E9E9E</color> <!-- Hint text gray color -->
         <color name="buttonTextColor">#FFFFFF</color> <!-- White text for buttons -->
         <color name="buttonBackgroundColor">#6200EA</color> <!-- Purple button color -->
+    <color name="buttonColor">#6200EE</color>
 
 
 </resources>

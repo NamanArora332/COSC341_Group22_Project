@@ -55,7 +55,14 @@ public class Add_Edit_Product extends AppCompatActivity {
         productDiscountEditText = findViewById(R.id.productDiscountEditText);
         saveProductButton = findViewById(R.id.saveProductButton);
 
+        // Initialize Back Button
+        Button backButton = findViewById(R.id.backButton);
 
+// Set Click Listener for Back Button
+        backButton.setOnClickListener(v -> {
+            // Finish the current activity and return to the previous one
+            finish();
+        });
 
         // Get Intent Data
         productId = getIntent().getStringExtra("productId");

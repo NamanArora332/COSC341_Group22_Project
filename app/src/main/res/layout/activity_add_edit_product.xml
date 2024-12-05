@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
 
     <!-- Product Name -->
     <EditText
@@ -14,11 +15,12 @@
         android:layout_height="wrap_content"
         android:hint="Product Name"
         android:inputType="text"
-        android:minHeight="48dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
     <!-- Price -->
     <EditText
@@ -27,11 +29,12 @@
         android:layout_height="wrap_content"
         android:hint="Price"
         android:inputType="numberDecimal"
-        android:minHeight="48dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/productNameEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
     <!-- Quantity -->
     <EditText
@@ -40,11 +43,12 @@
         android:layout_height="wrap_content"
         android:hint="Quantity"
         android:inputType="number"
-        android:minHeight="48dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/productPriceEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
     <!-- Category -->
     <EditText
@@ -53,11 +57,12 @@
         android:layout_height="wrap_content"
         android:hint="Category"
         android:inputType="text"
-        android:minHeight="48dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/productQuantityEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
     <!-- Discount -->
     <EditText
@@ -66,7 +71,8 @@
         android:layout_height="wrap_content"
         android:hint="Discount"
         android:inputType="number"
-        android:minHeight="48dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
         app:layout_constraintTop_toBottomOf="@id/productCategoryEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +84,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Save Product"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:background="@color/buttonColor"
         app:layout_constraintTop_toBottomOf="@id/productDiscountEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Back to Store Items List"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:background="@color/buttonColor"
+        app:layout_constraintTop_toBottomOf="@id/saveProductButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
