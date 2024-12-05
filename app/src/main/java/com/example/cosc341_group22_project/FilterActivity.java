@@ -69,36 +69,43 @@ public class FilterActivity extends AppCompatActivity {
     }
 
     private void applyFilter() {
-        // Existing apply filter logic
+        // Retrieve filter values
         String category = categorySpinner.getSelectedItem().toString();
         String minPriceStr = minPriceEditText.getText().toString().trim();
         String maxPriceStr = maxPriceEditText.getText().toString().trim();
         String discountStr = discountEditText.getText().toString().trim();
 
+        // Parse filter values
         double minPrice = minPriceStr.isEmpty() ? 0 : Double.parseDouble(minPriceStr);
         double maxPrice = maxPriceStr.isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceStr);
         int discount = discountStr.isEmpty() ? 0 : Integer.parseInt(discountStr);
 
-        Query query = db.collection("Product");
+        // Create Firestore query
+        Query query;
 
-        if (!"All".equalsIgnoreCase(category)) {
-            query = query.whereEqualTo("category", category);
+        if ("All".equalsIgnoreCase(category)) {
+            // Fetch all products
+            query = db.collection("Product");
+        } else {
+            // Fetch products for the selected category
+            query = db.collection("Product").whereEqualTo("category", category);
         }
 
-        if (minPrice > 0) {
-            query = query.whereGreaterThanOrEqualTo("price", minPrice);
-        }
-
+        // Execute the query
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 filteredProducts.clear();
                 task.getResult().forEach(document -> {
                     Product product = document.toObject(Product.class);
-                    if (product.getPrice() <= maxPrice && product.getDiscount() >= discount) {
+
+                    // Apply client-side filtering for price and discount
+                    if (product.getPrice() >= minPrice &&
+                            product.getPrice() <= maxPrice &&
+                            product.getDiscount() >= discount) {
                         filteredProducts.add(product);
                     }
                 });
-                searchResultsAdapter.notifyDataSetChanged();
+                searchResultsAdapter.notifyDataSetChanged(); // Update RecyclerView
             } else {
                 Toast.makeText(FilterActivity.this, "Error fetching products: " + task.getException(), Toast.LENGTH_SHORT).show();
             }
