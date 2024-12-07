@@ -11,9 +11,18 @@ public class Product {
     private int quantity;       // Quantity of the product
     private String storeId;     // Store ID reference
     private String storeName;   // Name of the store
+    private String imageUrl;
 
     // Default constructor (required by Firestore)
     public Product() {}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String photoUrl) {
+        this.imageUrl = photoUrl;
+    }
 
     // Getters and Setters for all fields
     public String getId() {

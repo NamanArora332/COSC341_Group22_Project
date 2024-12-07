@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -42,6 +44,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
         holder.productQuantity.setText("Quantity: " + product.getQuantity());
         holder.productPrice.setText("Current Price: $" + product.getPrice());
+        Glide.with(context)
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.ic_placeholder)
+                .into(holder.productImageView);
 
         // Set up Edit button functionality
         holder.editButton.setOnClickListener(v -> {
@@ -82,6 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productQuantity, productPrice;
         Button editButton, removeButton;
+        ImageView productImageView;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +97,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productPrice = itemView.findViewById(R.id.productPrice);
             editButton = itemView.findViewById(R.id.editButton);
             removeButton = itemView.findViewById(R.id.removeButton);
+            productImageView = itemView.findViewById(R.id.productImageView);
         }
     }
 }

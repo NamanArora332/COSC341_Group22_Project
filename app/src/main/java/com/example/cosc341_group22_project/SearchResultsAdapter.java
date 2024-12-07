@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -35,7 +38,20 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.productStore.setText("Store: " + product.getStoreName());
         holder.productPrice.setText("Price: $" + product.getPrice());
         holder.productQuantity.setText("Quantity: " + product.getQuantity());
+
+        String photoUrl = product.getImageUrl();
+        if (photoUrl != null && !photoUrl.isEmpty()) {
+            Glide.with(context)
+                    .load(photoUrl)
+                    .placeholder(R.drawable.ic_placeholder)
+                    .error(R.drawable.ic_placeholder)
+                    .into(holder.productImageView);
+        } else {
+            holder.productImageView.setImageResource(R.drawable.ic_placeholder);
+        }
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -44,6 +60,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     public static class SearchResultViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productStore, productPrice, productQuantity;
+        ImageView productImageView; // Add this line
 
         public SearchResultViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,6 +68,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             productStore = itemView.findViewById(R.id.productStore);
             productPrice = itemView.findViewById(R.id.productPrice);
             productQuantity = itemView.findViewById(R.id.productQuantity);
+            productImageView = itemView.findViewById(R.id.productImageView); // Bind the ImageView
         }
     }
+
 }

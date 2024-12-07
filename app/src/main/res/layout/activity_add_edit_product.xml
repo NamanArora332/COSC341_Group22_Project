@@ -2,108 +2,170 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/backgroundColor">
 
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Product Image"
+        android:src="@drawable/ic_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <!-- Product Name -->
+    <Button
+        android:id="@+id/uploadPhotoButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#007BFF"
+        android:drawableLeft="@drawable/baseline_file_upload_24"
+        android:text="Upload Photo"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/productImageView"
+        app:layout_constraintStart_toStartOf="@+id/productImageView"
+        app:layout_constraintTop_toTopOf="@+id/productImageView" />
+
     <EditText
         android:id="@+id/productNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
         android:hint="Product Name"
         android:inputType="text"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImageView" />
 
     <!-- Price -->
+
+    <!-- Quantity -->
     <EditText
         android:id="@+id/productPriceEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
         android:hint="Price"
         android:inputType="numberDecimal"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/productNameEditText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productNameEditText" />
 
-    <!-- Quantity -->
     <EditText
         android:id="@+id/productQuantityEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
         android:hint="Quantity"
         android:inputType="number"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/productPriceEditText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productPriceEditText" />
 
     <!-- Category -->
     <EditText
         android:id="@+id/productCategoryEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
         android:hint="Category"
         android:inputType="text"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/productQuantityEditText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productQuantityEditText" />
 
     <!-- Discount -->
     <EditText
         android:id="@+id/productDiscountEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
         android:hint="Discount"
         android:inputType="number"
         android:padding="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/productCategoryEditText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productCategoryEditText" />
+
+    <EditText
+        android:id="@+id/productImageUrlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Enter Image URL (optional)"
+        android:inputType="textUri"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productDiscountEditText" />
 
     <!-- Save Button -->
     <Button
         android:id="@+id/saveProductButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Save Product"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="#6750A4"
+        android:drawableLeft="@drawable/baseline_save_alt_24"
         android:padding="12dp"
+        android:text="Save Product"
         android:textColor="@android:color/white"
-        android:background="@color/buttonColor"
-        app:layout_constraintTop_toBottomOf="@id/productDiscountEditText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImageUrlEditText"
+        />
+
 
     <!-- Back Button -->
     <Button
         android:id="@+id/backButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back to Store Items List"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="#6750A4"
+        android:drawableLeft="@drawable/baseline_arrow_back_24"
         android:padding="12dp"
+        android:text="Back to Store Items List"
         android:textColor="@android:color/white"
-        android:background="@color/buttonColor"
-        app:layout_constraintTop_toBottomOf="@id/saveProductButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saveProductButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

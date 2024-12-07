@@ -77,9 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
-        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -87,38 +86,42 @@
         <!-- Filter Button -->
         <Button
             android:id="@+id/filterButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_weight="1"
             android:background="@drawable/rounded_button"
+            android:drawableLeft="@drawable/baseline_filter_list_24"
             android:text="Filter"
+            android:textAlignment="center"
             android:textColor="@color/buttonTextColor"
             android:textSize="16sp" />
 
         <!-- Store Items Button -->
         <Button
             android:id="@+id/storeItemsButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_weight="1"
             android:background="@drawable/rounded_button"
+            android:drawableLeft="@drawable/baseline_manage_search_24"
             android:text="Store Items Manage"
+            android:textAlignment="center"
             android:textColor="@color/buttonTextColor"
             android:textSize="16sp" />
 
         <!-- Logout Button -->
         <Button
             android:id="@+id/logoutButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:drawableLeft="@drawable/baseline_logout_24"
             android:text="Logout"
+            android:textAlignment="center"
             android:textColor="@color/buttonTextColor"
             android:textSize="16sp" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
