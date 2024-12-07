@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import android.text.Editable;
 import android.text.TextWatcher;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +27,15 @@ public class Price__Comparision extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Button logoutButton;
-    private Button storeItemsButton; // Button for store manager
-    private Button filterButton; // Button for filtering
+    private Button storeItemsButton;
+    private Button filterButton;
     private EditText searchEditText;
     private RecyclerView productsRecyclerView;
+    private ImageView notificationBell; // Added this for the bell icon
 
     private SearchResultsAdapter searchResultsAdapter;
     private List<Product> searchResultsList;
+    private List<Product> masterProductList; // This will hold all products
 
     private String userRole = ""; // To store user role
 
@@ -55,12 +57,16 @@ public class Price__Comparision extends AppCompatActivity {
         // Initialize Views
         logoutButton = findViewById(R.id.logoutButton);
         storeItemsButton = findViewById(R.id.storeItemsButton);
-        filterButton = findViewById(R.id.filterButton); // Initialize filter button
+        filterButton = findViewById(R.id.filterButton);
         searchEditText = findViewById(R.id.searchEditText);
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
+        notificationBell = findViewById(R.id.notificationBell); // Initialize bell icon
 
-        // Initialize RecyclerView
+        // Initialize Lists
         searchResultsList = new ArrayList<>();
+        masterProductList = new ArrayList<>();
+
+        // Set up RecyclerView
         searchResultsAdapter = new SearchResultsAdapter(this, searchResultsList);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         productsRecyclerView.setAdapter(searchResultsAdapter);
@@ -89,7 +95,13 @@ public class Price__Comparision extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Fetch user role to check if they're a store manager
+        // Notification Bell functionality
+        notificationBell.setOnClickListener(v -> {
+            Intent intent = new Intent(Price__Comparision.this, NotificationSettingsActivity.class);
+            startActivity(intent);
+        });
+
+        // Fetch user role
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             fetchUserRole(currentUser.getUid());
@@ -103,22 +115,23 @@ public class Price__Comparision extends AppCompatActivity {
         // Search functionality
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String query = s.toString().trim().toLowerCase(); // Convert query to lowercase
-                if (!query.isEmpty()) {
-                    searchProducts(query);
-                } else {
-                    searchResultsList.clear();
-                    searchResultsAdapter.notifyDataSetChanged();
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterLocalProducts(s.toString().trim().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
         });
+
+        // Load all products initially
+        loadAllProducts();
     }
 
     private void fetchUserRole(String userId) {
@@ -128,7 +141,7 @@ public class Price__Comparision extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         userRole = documentSnapshot.getString("role");
                         if ("store_manager".equals(userRole)) {
-                            storeItemsButton.setVisibility(View.VISIBLE); // Show button for store managers
+                            storeItemsButton.setVisibility(View.VISIBLE);
                         }
                     } else {
                         Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
@@ -139,25 +152,39 @@ public class Price__Comparision extends AppCompatActivity {
                 });
     }
 
-    private void searchProducts(String query) {
-        // Query Firestore for products
+    private void loadAllProducts() {
         db.collection("Product")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        searchResultsList.clear();
+                        masterProductList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Product product = document.toObject(Product.class);
-
-                            // Perform a case-insensitive "startsWith" check on the product name
-                            if (product.getName().toLowerCase().startsWith(query)) {
-                                searchResultsList.add(product);
-                            }
+                            masterProductList.add(product);
                         }
+                        // Initially show all products
+                        searchResultsList.clear();
+                        searchResultsList.addAll(masterProductList);
                         searchResultsAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(this, "Failed to fetch products: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void filterLocalProducts(String query) {
+        searchResultsList.clear();
+        if (query.isEmpty()) {
+            // Show all products if search is empty
+            searchResultsList.addAll(masterProductList);
+        } else {
+            // Filter based on the query
+            for (Product product : masterProductList) {
+                if (product.getName() != null && product.getName().toLowerCase().startsWith(query)) {
+                    searchResultsList.add(product);
+                }
+            }
+        }
+        searchResultsAdapter.notifyDataSetChanged();
     }
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,13 +17,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Price Comparison"
-        android:textAlignment="center"
+        android:layout_marginStart="20dp"
+        android:textAlignment="textStart"
         android:textColor="@color/titleTextColor"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/notificationBell"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Bell Icon -->
+    <ImageView
+        android:id="@+id/notificationBell"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/bell_icon"
+        android:padding="8dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/titleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleTextView" />
 
     <!-- Search Bar -->
     <EditText
@@ -76,7 +92,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
-            android:text="Filter Products"
+            android:text="Filter"
             android:textColor="@color/buttonTextColor"
             android:textSize="16sp" />
 
@@ -104,4 +120,5 @@
             android:textColor="@color/buttonTextColor"
             android:textSize="16sp" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
