@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Expanded State -->
+    <ConstraintSet android:id="@+id/expanded">
+        <Constraint android:id="@+id/filterContainer"
+            app:layout_constraintTop_toBottomOf="@id/filterTitleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Constraint android:id="@+id/showFiltersButton"
+            app:layout_constraintTop_toTopOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="gone"/>
+
+        <Constraint android:id="@+id/categorySpinner"
+            app:layout_constraintTop_toBottomOf="@id/showFiltersButton"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <Constraint android:id="@+id/minPriceEditText"
+            app:layout_constraintTop_toBottomOf="@id/categorySpinner"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <Constraint android:id="@+id/maxPriceEditText"
+            app:layout_constraintTop_toBottomOf="@id/minPriceEditText"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <Constraint android:id="@+id/discountEditText"
+            app:layout_constraintTop_toBottomOf="@id/maxPriceEditText"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <Constraint android:id="@+id/applyFilterButton"
+            app:layout_constraintTop_toBottomOf="@id/discountEditText"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <Constraint android:id="@+id/backToComparisonButton"
+            app:layout_constraintTop_toBottomOf="@id/applyFilterButton"
+            app:layout_constraintStart_toStartOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+    </ConstraintSet>
+
+    <!-- Collapsed State -->
+    <ConstraintSet android:id="@+id/collapsed">
+        <Constraint android:id="@+id/filterContainer"
+            app:layout_constraintTop_toBottomOf="@id/filterTitleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Constraint android:id="@+id/showFiltersButton"
+            app:layout_constraintTop_toTopOf="@+id/filterContainer"
+            app:layout_constraintEnd_toEndOf="@+id/filterContainer"
+            android:visibility="visible"/>
+
+        <!-- Hide everything else -->
+        <Constraint android:id="@+id/categorySpinner"
+            android:visibility="gone" />
+        <Constraint android:id="@+id/minPriceEditText"
+            android:visibility="gone" />
+        <Constraint android:id="@+id/maxPriceEditText"
+            android:visibility="gone" />
+        <Constraint android:id="@+id/discountEditText"
+            android:visibility="gone" />
+        <Constraint android:id="@+id/applyFilterButton"
+            android:visibility="gone" />
+        <Constraint android:id="@+id/backToComparisonButton"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetStart="@+id/expanded"
+        app:constraintSetEnd="@+id/collapsed"
+        app:duration="500"/>
+
+    <Transition
+        app:constraintSetStart="@+id/collapsed"
+        app:constraintSetEnd="@+id/expanded"
+        app:duration="500"/>
+</MotionScene>
