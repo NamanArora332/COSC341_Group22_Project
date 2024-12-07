@@ -162,6 +162,10 @@ public class Price__Comparision extends AppCompatActivity {
                             Product product = document.toObject(Product.class);
                             masterProductList.add(product);
                         }
+
+                        // Sort products by price in ascending order
+                        masterProductList.sort((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
+
                         // Initially show all products
                         searchResultsList.clear();
                         searchResultsList.addAll(masterProductList);
@@ -171,6 +175,7 @@ public class Price__Comparision extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void filterLocalProducts(String query) {
         searchResultsList.clear();
